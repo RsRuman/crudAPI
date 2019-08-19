@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Model\Admin;
+use App\User;
 use Illuminate\Http\Request;
+use App\Http\Resources\User\UserResource;
+use App\Http\Resources\User\UserCollection;
+use PhpParser\Node\Stmt\Echo_;
 
 class AdminController extends Controller
 {
@@ -14,7 +18,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $userList = UserCollection::collection(User::all());
+
+        return view('adminPanel', ['userList'=> $userList]);
     }
 
     /**
@@ -44,9 +50,9 @@ class AdminController extends Controller
      * @param  \App\Model\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function show(Admin $admin)
+    public function show(User $admin)
     {
-        //
+        return new UserResource($admin);
     }
 
     /**
@@ -55,9 +61,9 @@ class AdminController extends Controller
      * @param  \App\Model\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function edit(Admin $admin)
+    public function edit(User $admin)
     {
-        //
+        echo "Edit";
     }
 
     /**
@@ -67,9 +73,9 @@ class AdminController extends Controller
      * @param  \App\Model\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Admin $admin)
+    public function update(Request $request, User $admin)
     {
-        //
+        echo "Update";
     }
 
     /**
@@ -78,8 +84,8 @@ class AdminController extends Controller
      * @param  \App\Model\Admin  $admin
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Admin $admin)
+    public function destroy(User $admin)
     {
-        //
+        echo "Destroy";
     }
 }
